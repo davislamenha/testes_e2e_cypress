@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "cypress": "cypress run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "types": "cypress",
   "keywords": [],
   "author": "",
   "license": "ISC",
