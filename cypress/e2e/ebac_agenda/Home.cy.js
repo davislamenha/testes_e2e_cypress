@@ -2,12 +2,16 @@ describe('Testes para na Home', () => {
   beforeEach(() => cy.visit('https://agenda-contatos-react.vercel.app/'));
 
   it('Adicionar contato', () => {
-    cy.get('input[type="text"]').type('Davis');
-    cy.get('input[type="email"]').type('davis@email.com');
-    cy.get('input[type="tel"]').type('82988776655');
-    cy.get('button.adicionar').click();
+    cy.get('.contato')
+      .its('length')
+      .then((qtdContatos) => {
+        cy.get('input[type="text"]').type('Davis');
+        cy.get('input[type="email"]').type('davis@email.com');
+        cy.get('input[type="tel"]').type('82988776655');
+        cy.get('button.adicionar').click();
 
-    cy.get('.contato').should('have.length', 1);
+        cy.get('.contato').should('have.length', qtdContatos + 1);
+      });
   });
 
   it('Alterar contato', () => {
@@ -24,8 +28,12 @@ describe('Testes para na Home', () => {
   });
 
   it('Remover contato', () => {
-    cy.get('button.delete').first().click();
+    cy.get('.contato')
+      .its('length')
+      .then((qtdContatos) => {
+        cy.get('button.delete').first().click();
 
-    cy.get('.contato').should('have.length', 0);
+        cy.get('.contato').should('have.length', qtdContatos - 1);
+      });
   });
 });
